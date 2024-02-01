@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:signify_test/routes/app_routes.dart';
 import 'package:signify_test/service_locator.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'core/utils/constants.dart';
-import 'core/utils/mytheme.dart';
+import 'core/utils/my_theme.dart';
 import 'features/quotes/domain/entity/quote_entity_adapter.dart';
-import 'features/quotes/presentation/bloc/quote_bloc.dart';
-import 'features/quotes/presentation/bloc/quote_page_bloc.dart';
-import 'features/quotes/presentation/pages/home_page.dart';
 
 void main() async {
-  // Setup Dependencies
-  setupDependencies();
   WidgetsFlutterBinding.ensureInitialized();
-
   await initializeApp();
-
+  setupDependencies();
   runApp(const MyApp());
 }
 
@@ -30,21 +23,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: Constants.appName,
       theme: MyThemes.lightThemes,
       darkTheme: MyThemes.darkThemes,
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider<QuoteBloc>(
-            create: (context) => getIt<QuoteBloc>(),
-          ),
-          BlocProvider<QuotePageBloc>(
-            create: (context) => getIt<QuotePageBloc>(),
-          ),
-        ],
-        child: const HomePage(),
-      ),
+      routeInformationProvider: AppRoutes.router.routeInformationProvider,
+      routeInformationParser: AppRoutes.router.routeInformationParser,
+      routerDelegate: AppRoutes.router.routerDelegate,
       debugShowCheckedModeBanner: false,
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:signify_test/features/quotes/domain/entity/quote_entity.dart';
 import 'package:signify_test/features/quotes/domain/repository/quote_repository.dart';
-import 'package:signify_test/features/quotes/domain/usecase/get_random_quote_use_case.dart';
+import 'package:signify_test/features/quotes/domain/use_case/get_random_quote_use_case.dart';
 
 
 
@@ -20,7 +20,7 @@ void main() {
     });
 
     test('execute returns QuoteEntity on success', () async {
-      final expectedQuoteEntity = QuoteEntity(
+      const expectedQuoteEntity = QuoteEntity(
         id: '1',
         content: 'Sample quote content',
         author: 'Sample Author',

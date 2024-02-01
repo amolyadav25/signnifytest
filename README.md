@@ -1,10 +1,16 @@
 
-# App Name
+# Signify Test App
 Signify Test App
 ## Screenshots
 
-![Alt text](screenshot/Screenshot_2024-02-01-12-37-43-249_com.amolyadavflutter.signify_test.jpg)
-![Alt text](screenshot/Screenshot_2024-02-01-12-38-13-956_com.amolyadavflutter.signify_test.jpg)
+![Alt text](screenshot/windows_share.png)
+![Alt text](screenshot/windows.png)
+![Alt text](screenshot/home_dark.jpeg)
+![Alt text](screenshot/home_light_web.png)
+![Alt text](screenshot/home_light.jpeg)
+![Alt text](screenshot/splash_light.jpeg)
+![Alt text](screenshot/splash_web_light.png)
+
 
 ## Features
 
@@ -16,18 +22,19 @@ Signify Test App
 ## Installation
 
 Install Dependencies
+flutter pub get 
 
-flutter pub get
 Run the App on Android
-
 flutter run -d android
+
 Run the App on iOS
-
 flutter run -d ios
-Run the App for Web
 
+Run the App for Web
 flutter run -d web
 
+Run the App for Windows
+flutter run -d windows
 ### Prerequisites
 
 Make sure you have the following installed on your machine:
@@ -38,6 +45,7 @@ Make sure you have the following installed on your machine:
 
 ```bash
 git clone https://github.com/amolyadav25/signnifytest.git
-cd your-repository
+cd signnify_test 
+flutter run -d "your device id"
 
 

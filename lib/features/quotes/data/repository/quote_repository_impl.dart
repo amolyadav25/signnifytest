@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:signify_test/core/utils/constants.dart';
 
+import '../../../../core/exceptions/no_internet_exception.dart';
 import '../../../../core/network/connectivity_util.dart';
 import '../../domain/entity/quote_entity.dart';
 import '../../domain/repository/quote_repository.dart';
@@ -45,7 +47,7 @@ class QuotableRepositoryImpl implements QuoteRepository {
     final localQuotes = localDataSource.getAllQuotes();
     return localQuotes.isNotEmpty
         ? localQuotes.first
-        : QuoteEntity(
+        : const QuoteEntity(
             id: "7CqA_-kKZKKF",
             content:
                 "You don't choose your family. They are God's gift to you, as you are to them.",
@@ -71,24 +73,22 @@ class QuotableRepositoryImpl implements QuoteRepository {
         final List<QuoteModel> quoteModels = List<QuoteModel>.from(
           quoteJsonList.map((quoteJson) => QuoteModel.fromJson(quoteJson)),
         );
-        quotes = quoteModels.map((quoteModel) => quoteModel.toEntity()).toList();
+        quotes =
+            quoteModels.map((quoteModel) => quoteModel.toEntity()).toList();
 
         await localDataSource.saveQuotes(quotes);
+        return quotes;
       } else {
-        quotes = await localDataSource.getAllQuotes();
+        throw NoInternetException(message: Constants.errorInternet);
       }
-
-      return quotes;
     } catch (e) {
       debugPrint('$e');
-      return await localDataSource.getAllQuotes();
+      return localDataSource.getAllQuotes();
     }
   }
 
   @override
-  Future<List<QuoteEntity>> getLocalQuotes() async{
-    return await localDataSource.getAllQuotes();
+  Future<List<QuoteEntity>> getLocalQuotes() async {
+    return localDataSource.getAllQuotes();
   }
-
-
 }

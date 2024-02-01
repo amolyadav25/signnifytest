@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:signify_test/features/quotes/domain/entity/quote_entity.dart';
 import 'package:signify_test/features/quotes/domain/repository/quote_repository.dart';
-import 'package:signify_test/features/quotes/domain/usecase/get_quotes_use_case.dart';
+import 'package:signify_test/features/quotes/domain/use_case/get_quotes_use_case.dart';
 
 class MockQuoteRepository extends Mock implements QuoteRepository {}
 
@@ -18,7 +18,7 @@ void main() {
 
     test('execute returns a list of QuoteEntity on success', () async {
       final expectedQuotes = [
-        QuoteEntity(
+        const QuoteEntity(
           id: '1',
           content: 'Quote 1 content',
           author: 'Author 1',
@@ -28,7 +28,7 @@ void main() {
           dateAdded: '2024-01-31',
           dateModified: '2024-01-31',
         ),
-        QuoteEntity(
+        const QuoteEntity(
           id: '2',
           content: 'Quote 2 content',
           author: 'Author 2',

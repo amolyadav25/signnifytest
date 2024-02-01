@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:signify_test/features/quotes/presentation/bloc/quote_page_bloc.dart';
-
+import 'package:signify_test/features/quotes/presentation/bloc/quote_page/quote_page_bloc.dart';
 import 'core/network/api_client.dart';
 import 'core/network/connectivity_util.dart';
-
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
-
 import 'features/quotes/data/datasource/quotable_api_data_source.dart';
 import 'features/quotes/data/datasource/quote_local_data_source.dart';
 import 'features/quotes/data/repository/quote_repository_impl.dart';
-import 'features/quotes/domain/usecase/get_quotes_use_case.dart';
-import 'features/quotes/domain/usecase/get_random_quote_use_case.dart';
-import 'features/quotes/presentation/bloc/quote_bloc.dart';
+import 'features/quotes/domain/use_case/get_quotes_use_case.dart';
+import 'features/quotes/domain/use_case/get_random_quote_use_case.dart';
+import 'features/quotes/presentation/bloc/quote_bloc/quote_bloc.dart';
+import 'features/quotes/presentation/bloc/quotes_bloc/quotes_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -28,13 +26,18 @@ void setupDependencies() {
     getIt<ConnectivityUtil>(),
     getIt<Dio>(),
   ));
-  getIt.registerSingleton(GetRandomQuoteUseCase(getIt<QuotableRepositoryImpl>()));
+  getIt.registerSingleton(
+      GetRandomQuoteUseCase(getIt<QuotableRepositoryImpl>()));
 
-  getIt.registerSingleton(GetQuotesUseCase(quoteRepository: getIt<QuotableRepositoryImpl>()));
+  getIt.registerSingleton(
+      GetQuotesUseCase(quoteRepository: getIt<QuotableRepositoryImpl>()));
   getIt.registerSingleton(QuoteBloc(
     getRandomQuoteUseCase: getIt<GetRandomQuoteUseCase>(),
+  ));
+  getIt.registerSingleton(QuotesBloc(
     getQuotesUseCase: getIt<GetQuotesUseCase>(),
   ));
   getIt.registerSingleton(PageController());
-  getIt.registerFactory(() => QuotePageBloc(pageController: getIt<PageController>()));
+  getIt.registerFactory(
+      () => QuotePageBloc(pageController: getIt<PageController>()));
 }

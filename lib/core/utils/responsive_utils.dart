@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:share_it/share_it.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../features/quotes/domain/entity/quote_entity.dart';
 
 double getFontSize(double width) {
@@ -24,8 +24,7 @@ double getAuthorFontSize(BoxConstraints constraints) {
 }
 
 void shareQuote(QuoteEntity quoteEntity) {
-  ShareIt.text(
-    content:
+  Share.share(
     'Check out this quote:\n${quoteEntity.content}\n- ${quoteEntity.author}',
   );
 }
