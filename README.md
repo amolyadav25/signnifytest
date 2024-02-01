@@ -1,5 +1,5 @@
 
-# Your App Name
+# App Name
 Signify Test App
 ## Screenshots
 
